@@ -12,6 +12,10 @@ Describe:
 
 `$ minikube service helloworld-deployment --url`
 
+Update image:
+
+`$ kubectl set image deployment/helloworld-deployment k8s-demo=rafaritter44/k8s-demo:2`
+
 Delete:
 
 `$ kubectl delete service helloworld-deployment`
