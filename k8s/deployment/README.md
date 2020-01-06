@@ -16,6 +16,14 @@ Update image:
 
 `$ kubectl set image deployment/helloworld-deployment k8s-demo=rafaritter44/k8s-demo:2`
 
+Check history:
+
+`$ kubectl rollout history deployment/helloworld-deployment`
+
+Rollback:
+
+`$ kubectl rollout undo deployment/helloworld-deployment`
+
 Delete:
 
 `$ kubectl delete service helloworld-deployment`
