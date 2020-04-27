@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netty-deployment
+  labels:
+    app: netty
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: netty
+  template:
+    metadata:
+      labels:
+        app: netty
+    spec:
+      containers:
+      - name: netty
+        image: rafaritter44/netty
+        ports:
+        - containerPort: 8080
