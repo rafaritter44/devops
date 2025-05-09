@@ -1,11 +1,16 @@
-from flask import Flask, Response
-from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
+from flask import Flask
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from prometheus_client import make_wsgi_app, Counter
 
 app = Flask(__name__)
 
+app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
+    '/metrics': make_wsgi_app()
+})
+
 REQUEST_COUNT = Counter(
     'flask_app_request_count', 
-    'Total number of requests to the Flask app',
+    'Total number of requests to the Flask app.',
     ['method', 'endpoint']
 )
 
@@ -13,10 +18,3 @@ REQUEST_COUNT = Counter(
 def hello():
     REQUEST_COUNT.labels(method='GET', endpoint='/').inc()
     return "Hello!"
-
-@app.route('/metrics')
-def metrics():
-    """
-    The endpoint that Prometheus will scrape.
-    """
-    return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
