@@ -27,3 +27,7 @@
 ## Viewing Prometheus metrics
 
 `$ curl localhost:8000/metrics`
+
+## Running tests
+
+`$ pytest`
