@@ -41,3 +41,13 @@ Visit `http://localhost:8080`.
 ### Open Grafana UI
 
 Visit `http://localhost:3000`.
+
+## Accessing Prometheus
+
+### Port-forward Prometheus service
+
+`$ kubectl port-forward svc/prometheus-server 9090:80 -n infra`
+
+### Open Prometheus UI
+
+Visit `http://localhost:9090`.
