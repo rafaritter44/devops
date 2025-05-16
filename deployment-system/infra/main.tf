@@ -4,6 +4,12 @@ resource "kubernetes_namespace" "infra" {
   }
 }
 
+resource "kubernetes_namespace" "apps" {
+  metadata {
+    name = "apps"
+  }
+}
+
 resource "helm_release" "jenkins" {
   name       = "jenkins"
   namespace  = "infra"
