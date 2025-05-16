@@ -34,10 +34,10 @@ Visit `http://localhost:8080`.
 
 `$ kubectl get secret grafana -n infra -o jsonpath="{.data.admin-password}" | base64 --decode && echo`
 
-### Port-forward Jenkins service
+### Port-forward Grafana service
 
 `$ kubectl port-forward svc/grafana 3000:80 -n infra`
 
-### Open Jenkins UI
+### Open Grafana UI
 
 Visit `http://localhost:3000`.
