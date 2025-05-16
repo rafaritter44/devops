@@ -27,3 +27,17 @@
 ### Open Jenkins UI
 
 Visit `http://localhost:8080`.
+
+## Accessing Grafana
+
+### Retrieve Grafana admin password
+
+`$ kubectl get secret grafana -n infra -o jsonpath="{.data.admin-password}" | base64 --decode && echo`
+
+### Port-forward Jenkins service
+
+`$ kubectl port-forward svc/grafana 3000:80 -n infra`
+
+### Open Jenkins UI
+
+Visit `http://localhost:3000`.
