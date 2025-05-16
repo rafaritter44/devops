@@ -13,3 +13,17 @@
 `$ tofu init`
 
 `$ tofu apply`
+
+## Accessing Jenkins
+
+### Retrieve Jenkins admin password
+
+`$ kubectl get secret --namespace infra jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode && echo`
+
+### Port-forward Jenkins service
+
+`$ kubectl port-forward svc/jenkins 8080:8080 -n infra`
+
+### Open Jenkins UI
+
+Visit `http://localhost:8080`.
