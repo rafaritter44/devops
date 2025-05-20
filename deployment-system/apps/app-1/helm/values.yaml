@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: app-1
+  repository: rafaritter44/app-1
   tag: latest
   pullPolicy: IfNotPresent
 
