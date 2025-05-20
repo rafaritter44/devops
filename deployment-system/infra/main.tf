@@ -32,6 +32,12 @@ resource "helm_release" "grafana" {
   repository = "https://grafana.github.io/helm-charts"
   chart      = "grafana"
   version    = "9.0.0"
-
   values = [file("${path.module}/grafana-values.yaml")]
+}
+
+resource "helm_release" "app_1" {
+  name       = "app-1"
+  namespace  = "apps"
+  chart      = "${path.module}/../apps/app-1/helm/"
+  values     = [file("${path.module}/../apps/app-1/helm/values.yaml")]
 }
