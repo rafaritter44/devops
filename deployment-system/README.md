@@ -14,6 +14,22 @@
 
 `$ tofu apply`
 
+## Accessing App 1
+
+### Port-forward App 1 service
+
+`$ kubectl port-forward svc/app-1 8080:80 -n apps`
+
+### Call App 1 endpoints
+
+#### Hello endpoint
+
+`$ curl localhost:8080`
+
+#### Metrics endpoint
+
+`$ curl localhost:8080/metrics`
+
 ## Accessing Jenkins
 
 ### Retrieve Jenkins admin password
