@@ -1,3 +1,5 @@
+namespace: apps
+
 replicaCount: 1
 
 image:
