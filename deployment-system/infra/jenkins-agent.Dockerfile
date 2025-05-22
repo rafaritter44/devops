@@ -1,12 +1,14 @@
-FROM docker:dind
+FROM jenkins/inbound-agent:latest
 
-RUN apk add --no-cache \
+USER root
+
+RUN apt-get update && apt-get install -y \
     git \
     python3 \
-    py3-pip \
+    python3-pip \
     curl \
-    bash
-
-RUN ln -sf python3 /usr/bin/python && ln -sf pip3 /usr/bin/pip
+    bash \
+    docker.io \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
