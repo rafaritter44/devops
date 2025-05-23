@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Git repo') {
+            steps {
+                git url: 'https://github.com/rafaritter44/devops.git', branch: 'master'
+            }
+        }
+        stage('Run tests') {
+            steps {
+                dir('deployment-system/apps/app-1') {
+                    sh '''
+                        python3 -m venv venv
+                        source venv/bin/activate
+                        pip3 install -r requirements-dev.txt
+                        pytest
+                    '''
+                }
+            }
+        }
+        stage('Build Docker image') {
+            steps {
+                dir('deployment-system/apps/app-1') {
+                    sh "docker build -t rafaritter44/app-1:${BUILD_NUMBER} ."
+                }
+            }
+        }
+        stage('Publish Docker image') {
+            steps {
+                sh "docker push rafaritter44/app-1:${BUILD_NUMBER}"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                dir('deployment-system/apps/app-1/helm') {
+                    sh "helm upgrade --install app-1 --set image.tag=${BUILD_NUMBER} ."
+                }
+            }
+        }
+    }
+}
