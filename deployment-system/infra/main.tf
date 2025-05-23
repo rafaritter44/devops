@@ -10,14 +10,6 @@ resource "kubernetes_namespace" "apps" {
   }
 }
 
-resource "helm_release" "jenkins" {
-  name       = "jenkins"
-  namespace  = "infra"
-  repository = "https://charts.jenkins.io"
-  chart      = "jenkins"
-  version    = "5.8.45"
-}
-
 resource "helm_release" "prometheus" {
   name       = "prometheus"
   namespace  = "infra"
