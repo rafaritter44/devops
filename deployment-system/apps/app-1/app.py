@@ -17,4 +17,4 @@ REQUEST_COUNT = Counter(
 @app.route('/')
 def hello():
     REQUEST_COUNT.labels(method='GET', endpoint='/').inc()
-    return "Hello!"
+    return "Hello, World!"
