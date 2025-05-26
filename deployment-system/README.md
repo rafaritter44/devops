@@ -1,6 +1,6 @@
 # Deployment System
 
-## Setup
+## Cluster setup
 
 ### Kind setup
 
@@ -15,6 +15,12 @@
 `$ tofu apply`
 
 ## Accessing App 1
+
+### Deploy App 1
+
+1. Log in to Docker (`$ docker login`).
+2. Import App 1's Jenkinsfile into Jenkins.
+3. Run the Jenkins pipeline.
 
 ### Port-forward App 1 service
 
