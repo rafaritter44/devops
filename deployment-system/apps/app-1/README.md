@@ -1,5 +1,10 @@
 # App 1
 
+## Requirements
+
+1. Python
+2. pip
+
 ## Local setup
 
 `$ python3 -m venv venv`
