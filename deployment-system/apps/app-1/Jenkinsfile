@@ -11,7 +11,7 @@ pipeline {
                 git url: 'https://github.com/rafaritter44/devops.git', branch: 'master'
             }
         }
-        stage('Run tests') {
+        stage('Run app tests') {
             steps {
                 dir('deployment-system/apps/app-1') {
                     sh '''
@@ -35,7 +35,7 @@ pipeline {
                 sh "docker push rafaritter44/app-1:${BUILD_NUMBER}"
             }
         }
-        stage('Deploy') {
+        stage('Deploy Helm chart') {
             steps {
                 dir('deployment-system/apps/app-1/helm') {
                     sh "helm upgrade --install app-1 --set image.tag=${BUILD_NUMBER} ."
