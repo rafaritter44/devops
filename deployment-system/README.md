@@ -1,5 +1,14 @@
 # Deployment System
 
+## Requirements
+
+1. Docker
+2. kubectl
+3. kind
+4. Helm
+5. OpenTofu
+6. Jenkins
+
 ## Cluster setup
 
 ### Kind setup
