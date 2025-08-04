@@ -18,7 +18,5 @@ Each rule consists of a priority, one or more actions, and one or more condition
 
 ## References
 
-- https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html
-- https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html
 - https://aws.amazon.com/compare/the-difference-between-the-difference-between-application-network-and-gateway-load-balancing/
 - https://aws.amazon.com/what-is/osi-model/
