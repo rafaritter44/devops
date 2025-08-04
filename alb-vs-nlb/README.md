@@ -1,20 +1,12 @@
 # ALB vs. NLB
 
-## ALB
-
-- OSI layer: 7.
-- Target types: IP, instance, and Lambda.
-- Protocols: HTTP, HTTPS, and gRPC.
-- Algorithm: Round-robin.
-- Use cases: Microservices, containers, and web apps.
-
-## NLB
-
-- OSI layer: 4.
-- Target types: IP, instance, and ALB.
-- Protocols: TCP, UDP, and TLS.
-- Algorithm: Flow hash.
-- Use cases: Games, media streaming, and IoT.
+|                  | ALB                                     | NLB                             |
+|------------------|-----------------------------------------|---------------------------------|
+| **OSI Layer**    | 7                                       | 4                               |
+| **Target types** | IP, instance, and Lambda                | IP, instance, and ALB           |
+| **Protocols**    | HTTP, HTTPS, and gRPC                   | TCP, UDP, and TLS               |
+| **Algorithm**    | Round-robin                             | Flow hash                       |
+| **Use cases**    | Microservices, containers, and web apps | Games, media streaming, and IoT |
 
 ## References
 
