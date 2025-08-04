@@ -3,7 +3,7 @@
 ## ALB
 
 - OSI layer: 7.
-- Target types: IP addresses, instances, and AWS Lambda.
+- Target types: IP, instance, and Lambda.
 - Protocols: HTTP, HTTPS, and gRPC.
 - Algorithm: Round-robin.
 - Use cases: Microservices, containers, and web apps.
@@ -11,7 +11,7 @@
 ## NLB
 
 - OSI layer: 4.
-- Target types: IP addresses, instances, and ALBs.
+- Target types: IP, instance, and ALB.
 - Protocols: TCP, UDP, and TLS.
 - Algorithm: Flow hash.
 - Use cases: Games, media streaming, and IoT.
