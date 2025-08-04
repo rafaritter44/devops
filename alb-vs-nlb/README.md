@@ -8,6 +8,14 @@
 | **Algorithm**    | Round-robin                             | Flow hash                       |
 | **Use cases**    | Microservices, containers, and web apps | Games, media streaming, and IoT |
 
+## ALB components
+
+![ALB components](images/alb-components.png)
+
+### Listener rules
+
+Each rule consists of a priority, one or more actions, and one or more conditions. (ALB only?)
+
 ## References
 
 - https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html
