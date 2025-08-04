@@ -2,7 +2,7 @@
 
 |                  | ALB                                     | NLB                             |
 |------------------|-----------------------------------------|---------------------------------|
-| **OSI Layer**    | 7                                       | 4                               |
+| **OSI layer**    | 7                                       | 4                               |
 | **Target types** | IP, instance, and Lambda                | IP, instance, and ALB           |
 | **Protocols**    | HTTP, HTTPS, and gRPC                   | TCP, UDP, and TLS               |
 | **Algorithm**    | Round-robin                             | Flow hash                       |
