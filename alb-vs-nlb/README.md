@@ -8,6 +8,14 @@
 | **Algorithm**    | Round-robin                             | Flow hash                       |
 | **Use cases**    | Microservices, containers, and web apps | Games, media streaming, and IoT |
 
+## POCs
+
+1. Path-based routing (ALB only)
+2. TCP handling
+3. Latency (curl -w)
+4. Health checks
+5. Algorithms
+
 ## ALB components
 
 ![ALB components](images/alb-components.png)
