@@ -16,6 +16,11 @@
 4. Health checks
 5. Algorithms
 
+## Next steps
+
+1. elb.tf or alb.tf + nlb.tf
+2. outputs.tf
+
 ## ALB components
 
 ![ALB components](images/alb-components.png)
