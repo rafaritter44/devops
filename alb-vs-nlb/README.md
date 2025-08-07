@@ -18,8 +18,7 @@
 
 ## Next steps
 
-1. elb.tf or alb.tf + nlb.tf
-2. outputs.tf
+1. outputs.tf
 
 ## ALB components
 
