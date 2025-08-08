@@ -1,5 +1,7 @@
 from flask import Flask
 import socket
+import os
+import threading
 
 app = Flask(__name__)
 
@@ -10,3 +12,8 @@ def health():
 @app.route('/b')
 def b():
     return f"Hello from app B on {socket.gethostname()}"
+
+@app.route("/shutdown", methods=["POST"])
+def shutdown():
+    threading.Timer(1.0, lambda: os._exit(0)).start()
+    return "Shutting down..."
