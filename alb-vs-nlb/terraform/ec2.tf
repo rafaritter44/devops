@@ -21,7 +21,7 @@ resource "aws_instance" "http_server_a" {
               git clone https://github.com/rafaritter44/devops.git
               cd devops/alb-vs-nlb/http-server/a
               pip3 install -r requirements.txt
-              nohup python3 app.py &
+              nohup flask run --host=0.0.0.0 &
               EOF
 }
 
@@ -42,7 +42,7 @@ resource "aws_instance" "http_server_b" {
               git clone https://github.com/rafaritter44/devops.git
               cd devops/alb-vs-nlb/http-server/b
               pip3 install -r requirements.txt
-              nohup python3 app.py &
+              nohup flask run --host=0.0.0.0 &
               EOF
 }
 
