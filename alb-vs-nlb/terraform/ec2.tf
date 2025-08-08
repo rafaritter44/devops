@@ -15,11 +15,12 @@ resource "aws_instance" "http_server_a" {
   }
   user_data = <<-EOF
               #!/bin/bash
+              set -x
               dnf update -y
               dnf install -y python3-pip git
               cd /home/ec2-user
               git clone https://github.com/rafaritter44/devops.git
-              cd devops/alb-vs-nlb/http-server/a
+              cd /home/ec2-user/devops/alb-vs-nlb/http-server/a
               pip3 install -r requirements.txt
               nohup flask run --host=0.0.0.0 &
               EOF
@@ -36,11 +37,12 @@ resource "aws_instance" "http_server_b" {
   }
   user_data = <<-EOF
               #!/bin/bash
+              set -x
               dnf update -y
               dnf install -y python3-pip git
               cd /home/ec2-user
               git clone https://github.com/rafaritter44/devops.git
-              cd devops/alb-vs-nlb/http-server/b
+              cd /home/ec2-user/devops/alb-vs-nlb/http-server/b
               pip3 install -r requirements.txt
               nohup flask run --host=0.0.0.0 &
               EOF
@@ -58,11 +60,12 @@ resource "aws_instance" "tcp_server" {
   }
   user_data = <<-EOF
               #!/bin/bash
+              set -x
               dnf update -y
               dnf install -y git
               cd /home/ec2-user
               git clone https://github.com/rafaritter44/devops.git
-              cd devops/alb-vs-nlb/tcp-server
+              cd /home/ec2-user/devops/alb-vs-nlb/tcp-server
               nohup python3 app.py &
               EOF
 }
