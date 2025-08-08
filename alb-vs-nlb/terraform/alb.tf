@@ -45,3 +45,31 @@ resource "aws_lb_target_group_attachment" "alb_http_b" {
   target_id        = aws_instance.http_server_b.id
   port             = 5000
 }
+
+resource "aws_lb_listener_rule" "alb_path_a" {
+  listener_arn = aws_lb_listener.alb_listener.arn
+  priority     = 10
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.alb_tg_a.arn
+  }
+  condition {
+    path_pattern {
+      values = ["/a*"]
+    }
+  }
+}
+
+resource "aws_lb_listener_rule" "alb_path_b" {
+  listener_arn = aws_lb_listener.alb_listener.arn
+  priority     = 20
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.alb_tg_b.arn
+  }
+  condition {
+    path_pattern {
+      values = ["/b*"]
+    }
+  }
+}
