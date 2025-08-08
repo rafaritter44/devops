@@ -14,7 +14,14 @@ def handle_client(conn, addr):
             data = conn.recv(1024)
             if not data:
                 break
-            response = f"Echo from {hostname}: {data.decode()}".encode()
+            message = data.decode().strip()
+            if message.upper() == 'SHUTDOWN':
+                print(f"[{hostname}] Shutdown command received from {addr}")
+                conn.sendall(b"Shutting down...")
+                conn.shutdown(socket.SHUT_RDWR) # Signal no more data will be sent.
+                threading.Timer(1.0, lambda: os._exit(0)).start()
+                break
+            response = f"Echo from {hostname}: {message}\n".encode()
             conn.sendall(response)
     finally:
         conn.close()
