@@ -1,5 +1,11 @@
 # ALB vs. NLB
 
+## ELB components
+
+![ELB components](images/elb-components.png)
+
+## Comparison table
+
 |                  | ALB                                     | NLB                             |
 |------------------|-----------------------------------------|---------------------------------|
 | **OSI layer**    | 7                                       | 4                               |
@@ -15,14 +21,6 @@
 3. Latency (curl -w)
 4. Health checks
 5. Algorithms
-
-## ALB components
-
-![ALB components](images/alb-components.png)
-
-### Listener rules
-
-Each rule consists of a priority, one or more actions, and one or more conditions. (ALB only?)
 
 ## References
 
