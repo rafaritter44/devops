@@ -16,11 +16,37 @@
 
 ## POCs
 
-1. Path-based routing (ALB only)
-2. TCP handling
-3. Latency (curl -w)
-4. Health checks
-5. Algorithms
+### Output of `tofu apply`
+
+![Output of tofu apply](images/tofu-apply-output.png)
+
+### ALB: Path-based routing
+
+![Path-based routing](images/path-based-routing.png)
+
+### ALB: Round-robin algorithm
+
+![Round-robin](images/round-robin.png)
+
+### NLB: TCP handling
+
+![TCP handling](images/tcp-handling.png)
+
+### NLB: Flow hash algorithm
+
+![](images/flow-hash-local.png)
+
+![](images/flow-hash-vpn.png)
+
+### Latency
+
+![](images/latency.png)
+
+### Health checks
+
+![](images/alb-health-checks.png)
+
+![](images/nlb-health-checks.png)
 
 ## References
 
