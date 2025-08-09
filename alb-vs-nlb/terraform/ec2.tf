@@ -20,7 +20,7 @@ resource "aws_instance" "http_server_a" {
               dnf install -y python3-pip git
               cd /home/ec2-user
               git clone https://github.com/rafaritter44/devops.git
-              cd /home/ec2-user/devops/alb-vs-nlb/http-server/a
+              cd /home/ec2-user/devops/alb-vs-nlb/apps/http-server/a
               pip3 install -r requirements.txt
               nohup flask run --host=0.0.0.0 &
               EOF
@@ -42,7 +42,7 @@ resource "aws_instance" "http_server_b" {
               dnf install -y python3-pip git
               cd /home/ec2-user
               git clone https://github.com/rafaritter44/devops.git
-              cd /home/ec2-user/devops/alb-vs-nlb/http-server/b
+              cd /home/ec2-user/devops/alb-vs-nlb/apps/http-server/b
               pip3 install -r requirements.txt
               nohup flask run --host=0.0.0.0 &
               EOF
@@ -65,7 +65,7 @@ resource "aws_instance" "tcp_server" {
               dnf install -y git
               cd /home/ec2-user
               git clone https://github.com/rafaritter44/devops.git
-              cd /home/ec2-user/devops/alb-vs-nlb/tcp-server
+              cd /home/ec2-user/devops/alb-vs-nlb/apps/tcp-server
               nohup python3 app.py &
               EOF
 }
