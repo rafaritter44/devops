@@ -1,9 +1,5 @@
 # ALB vs. NLB
 
-## ELB components
-
-![ELB components](images/elb-components.png)
-
 ## Comparison table
 
 |                  | ALB                                     | NLB                             |
