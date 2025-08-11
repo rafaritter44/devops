@@ -34,19 +34,27 @@
 
 ### NLB: Flow hash algorithm
 
-![](images/flow-hash-local.png)
+**From my local machine**
 
-![](images/flow-hash-vpn.png)
+![Flow hash from my local machine](images/flow-hash-local.png)
 
-### Latency
+**Connected to a VPN**
 
-![](images/latency.png)
+![Flow hash connected to a VPN](images/flow-hash-vpn.png)
+
+### Latency comparison
+
+![Latency comparison](images/latency-comparison.png)
 
 ### Health checks
 
-![](images/alb-health-checks.png)
+**ALB**
 
-![](images/nlb-health-checks.png)
+![ALB health checks](images/alb-health-checks.png)
+
+**NLB**
+
+![NLB health checks](images/nlb-health-checks.png)
 
 ## References
 
