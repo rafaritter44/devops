@@ -60,4 +60,3 @@
 
 - https://aws.amazon.com/compare/the-difference-between-the-difference-between-application-network-and-gateway-load-balancing/
 - https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html
-- https://aws.amazon.com/what-is/osi-model/
