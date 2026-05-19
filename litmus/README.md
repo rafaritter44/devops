@@ -10,6 +10,11 @@
     - Node drain.
 - And a web UI (ChaosCenter).
 
+## Concepts
+
+Chaos Scenario
+Chaos Experiment
+
 ## Architecture
 
 User -> ChaosCenter/UI -> Chaos Engine (CRD) -> Chaos Runner Pod -> Inject Faults into Target App
