@@ -63,6 +63,10 @@ kubectl get pods -n podtato-kubectl | grep podtato-head-hat | grep Running | wc 
 kind delete cluster
 ```
 
+### Result
+
+![Experiment Result](experiment-result.png)
+
 ## Comparison
 
 Litmus
