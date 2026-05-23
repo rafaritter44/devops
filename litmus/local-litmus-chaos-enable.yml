@@ -18,7 +18,7 @@ metadata:
   name: subscriber-config
   namespace: litmus
 data:
-  SERVER_ADDR: http://localhost:9091/api/query
+  SERVER_ADDR: http://chaos-litmus-server-service:9002/query
   INFRA_SCOPE: cluster
   VERSION: 3.28.0
   START_TIME: "1779565337737"
