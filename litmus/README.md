@@ -30,4 +30,26 @@ kubectl port-forward svc/chaos-litmus-frontend-service -n litmus 9091:9091
 kind delete cluster
 ```
 
-...
+## Trade-offs
+
+Litmus
+- 2019
+- Open-source
+- Kubernetes
+
+Other tools
+- Chaos Monkey (pioneer, open-sourced in 2012)
+- Gremlin (commercial tool, 2017)
+- AWS FIS (2021)
+- Chaos Mesh (open-source, K8s, 2019)
+
+Litmus vs. Chaos Mesh
+- Chaos Mesh
+    - Fault Injector
+    - Simpler
+    - Best for debugging
+    - Requires scripting
+- Litmus
+    - Chaos Platform/Orchestrator
+    - More complex
+    - Best for pipelines
