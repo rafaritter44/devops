@@ -53,6 +53,13 @@ helm repo add litmuschaos https://litmuschaos.github.io/litmus-helm/
 kubectl create ns litmus
 helm install chaos litmuschaos/litmus --namespace=litmus --set portal.frontend.service.type=NodePort --set portal.server.graphqlServer.CHAOS_CENTER_UI_ENDPOINT=http://chaos-litmus-frontend-service.litmus.svc.cluster.local:9091 --set mongodb.image.registry=docker.io --set mongodb.image.repository=bitnami/mongodb --set mongodb.image.tag=latest --set mongodb.auth.enabled=true --set mongodb.auth.rootPassword=password
 kubectl port-forward svc/chaos-litmus-frontend-service -n litmus 9091:9091
+
+kubectl apply -f https://github.com/podtato-head/podtato-head-app/releases/download/v0.3.3/manifest.yaml
+kubectl label deployment podtato-head-hat app=podtato-head-hat -n podtato-kubectl
+kubectl apply -f local-litmus-chaos-enable.yml
+
+kubectl get pods -n podtato-kubectl | grep podtato-head-hat | grep Running | wc -l
+
 kind delete cluster
 ```
 
