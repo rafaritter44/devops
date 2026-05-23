@@ -1,0 +1,672 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  annotations:
+    workflows.argoproj.io/pod-name-format: v1
+  creationTimestamp: "2026-05-23T21:02:50Z"
+  generation: 8
+  labels:
+    infra_id: b478e24a-a045-4e7c-a46b-cb06f019abba
+    notify_id: caff9bef-e57d-4c81-9935-1371c2439b7b
+    revision_id: 63e5d4a4-137e-49a7-9fa1-6eb36ff3920a
+    updated_by: YWRtaW4
+    workflow_id: 5f1b00aa-14c8-400e-8571-0569ebe48911
+    workflows.argoproj.io/completed: "true"
+    workflows.argoproj.io/controller-instanceid: b478e24a-a045-4e7c-a46b-cb06f019abba
+    workflows.argoproj.io/phase: Succeeded
+  name: podtato-head-1779570170665
+  namespace: litmus
+  resourceVersion: "11054"
+  uid: 0d284397-0dbb-4390-95a1-fc21d20a0f11
+spec:
+  arguments:
+    parameters:
+    - name: adminModeNamespace
+      value: litmus
+  entrypoint: podtato-head
+  podGC:
+    strategy: OnWorkflowCompletion
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: argo-chaos
+  templates:
+  - inputs: {}
+    metadata: {}
+    name: podtato-head
+    outputs: {}
+    steps:
+    - - arguments: {}
+        name: install-chaos-faults
+        template: install-chaos-faults
+    - - arguments: {}
+        name: pod-delete-zl4
+        template: pod-delete-zl4
+    - - arguments: {}
+        name: cleanup-chaos-resources
+        template: cleanup-chaos-resources
+  - container:
+      args:
+      - kubectl apply -f /tmp/ -n {{workflow.parameters.adminModeNamespace}} && sleep
+        30
+      command:
+      - sh
+      - -c
+      image: litmuschaos/k8s:2.11.0
+      name: ""
+      resources: {}
+    inputs:
+      artifacts:
+      - name: pod-delete-zl4
+        path: /tmp/pod-delete-zl4.yaml
+        raw:
+          data: |
+            apiVersion: litmuschaos.io/v1alpha1
+            description:
+              message: |
+                Deletes a pod belonging to a deployment/statefulset/daemonset
+            kind: ChaosExperiment
+            metadata:
+              name: pod-delete
+              labels:
+                name: pod-delete
+                app.kubernetes.io/part-of: litmus
+                app.kubernetes.io/component: chaosexperiment
+                app.kubernetes.io/version: 3.28.0
+            spec:
+              definition:
+                scope: Namespaced
+                permissions:
+                  - apiGroups:
+                      - ""
+                    resources:
+                      - pods
+                    verbs:
+                      - create
+                      - delete
+                      - get
+                      - list
+                      - patch
+                      - update
+                      - deletecollection
+                  - apiGroups:
+                      - ""
+                    resources:
+                      - events
+                    verbs:
+                      - create
+                      - get
+                      - list
+                      - patch
+                      - update
+                  - apiGroups:
+                      - ""
+                    resources:
+                      - configmaps
+                    verbs:
+                      - get
+                      - list
+                  - apiGroups:
+                      - ""
+                    resources:
+                      - pods/log
+                    verbs:
+                      - get
+                      - list
+                      - watch
+                  - apiGroups:
+                      - ""
+                    resources:
+                      - pods/exec
+                    verbs:
+                      - get
+                      - list
+                      - create
+                  - apiGroups:
+                      - apps
+                    resources:
+                      - deployments
+                      - statefulsets
+                      - replicasets
+                      - daemonsets
+                    verbs:
+                      - list
+                      - get
+                  - apiGroups:
+                      - apps.openshift.io
+                    resources:
+                      - deploymentconfigs
+                    verbs:
+                      - list
+                      - get
+                  - apiGroups:
+                      - ""
+                    resources:
+                      - replicationcontrollers
+                    verbs:
+                      - get
+                      - list
+                  - apiGroups:
+                      - argoproj.io
+                    resources:
+                      - rollouts
+                    verbs:
+                      - list
+                      - get
+                  - apiGroups:
+                      - batch
+                    resources:
+                      - jobs
+                    verbs:
+                      - create
+                      - list
+                      - get
+                      - delete
+                      - deletecollection
+                  - apiGroups:
+                      - litmuschaos.io
+                    resources:
+                      - chaosengines
+                      - chaosexperiments
+                      - chaosresults
+                    verbs:
+                      - create
+                      - list
+                      - get
+                      - patch
+                      - update
+                      - delete
+                image: litmuschaos/go-runner:3.28.0
+                imagePullPolicy: Always
+                args:
+                  - -c
+                  - ./experiments -name pod-delete
+                command:
+                  - /bin/bash
+                env:
+                  - name: TOTAL_CHAOS_DURATION
+                    value: "15"
+                  - name: RAMP_TIME
+                    value: ""
+                  - name: FORCE
+                    value: "true"
+                  - name: CHAOS_INTERVAL
+                    value: "5"
+                  - name: PODS_AFFECTED_PERC
+                    value: ""
+                  - name: TARGET_CONTAINER
+                    value: ""
+                  - name: TARGET_PODS
+                    value: ""
+                  - name: DEFAULT_HEALTH_CHECK
+                    value: "false"
+                  - name: NODE_LABEL
+                    value: ""
+                  - name: SEQUENCE
+                    value: parallel
+                labels:
+                  name: pod-delete
+                  app.kubernetes.io/part-of: litmus
+                  app.kubernetes.io/component: experiment-job
+                  app.kubernetes.io/version: 3.28.0
+    metadata: {}
+    name: install-chaos-faults
+    outputs: {}
+  - container:
+      args:
+      - kubectl delete chaosengine -l workflow_run_id={{workflow.uid}} -n {{workflow.parameters.adminModeNamespace}}
+      command:
+      - sh
+      - -c
+      image: litmuschaos/k8s:2.11.0
+      name: ""
+      resources: {}
+    inputs: {}
+    metadata: {}
+    name: cleanup-chaos-resources
+    outputs: {}
+  - container:
+      args:
+      - -file=/tmp/chaosengine-pod-delete-zl4.yaml
+      - -saveName=/tmp/engine-name
+      image: litmuschaos/litmus-checker:2.11.0
+      name: ""
+      resources: {}
+    inputs:
+      artifacts:
+      - name: pod-delete-zl4
+        path: /tmp/chaosengine-pod-delete-zl4.yaml
+        raw:
+          data: |
+            apiVersion: litmuschaos.io/v1alpha1
+            kind: ChaosEngine
+            metadata:
+              annotations:
+                probeRef: '[{"name":"check-podtato-head-hat-pod","mode":"EOT"}]'
+              creationTimestamp: null
+              generateName: pod-delete-zl4
+              labels:
+                infra_id: b478e24a-a045-4e7c-a46b-cb06f019abba
+                step_pod_name: '{{pod.name}}'
+                workflow_name: podtato-head
+                workflow_run_id: '{{workflow.uid}}'
+              namespace: '{{workflow.parameters.adminModeNamespace}}'
+            spec:
+              appinfo:
+                appkind: deployment
+                applabel: app=podtato-head-hat
+                appns: podtato-kubectl
+              chaosServiceAccount: litmus-admin
+              components:
+                runner:
+                  resources: {}
+              engineState: active
+              experiments:
+              - name: pod-delete
+                spec:
+                  components:
+                    env:
+                    - name: TOTAL_CHAOS_DURATION
+                      value: "15"
+                    - name: RAMP_TIME
+                    - name: FORCE
+                      value: "true"
+                    - name: CHAOS_INTERVAL
+                      value: "5"
+                    - name: PODS_AFFECTED_PERC
+                    - name: TARGET_CONTAINER
+                    - name: TARGET_PODS
+                    - name: DEFAULT_HEALTH_CHECK
+                      value: "false"
+                    - name: NODE_LABEL
+                    - name: SEQUENCE
+                      value: parallel
+                    resources: {}
+                    statusCheckTimeouts: {}
+                  probe:
+                  - cmdProbe/inputs:
+                      command: kubectl get pods -n podtato-kubectl | grep podtato-head-hat | grep
+                        Running | wc -l
+                      comparator:
+                        criteria: '>'
+                        type: int
+                        value: "0"
+                    mode: EOT
+                    name: check-podtato-head-hat-pod
+                    runProperties:
+                      attempt: 1
+                      interval: 1s
+                      probeTimeout: 10s
+                    type: cmdProbe
+            status:
+              engineStatus: ""
+              experiments: null
+    metadata:
+      labels:
+        weight: "10"
+    name: pod-delete-zl4
+    outputs: {}
+status:
+  artifactRepositoryRef:
+    artifactRepository: {}
+    default: true
+  conditions:
+  - status: "False"
+    type: PodRunning
+  - status: "True"
+    type: Completed
+  finishedAt: "2026-05-23T21:06:11Z"
+  nodes:
+    podtato-head-1779570170665:
+      children:
+      - podtato-head-1779570170665-3258849877
+      displayName: podtato-head-1779570170665
+      finishedAt: "2026-05-23T21:06:11Z"
+      id: podtato-head-1779570170665
+      name: podtato-head-1779570170665
+      outboundNodes:
+      - podtato-head-1779570170665-3568337420
+      phase: Succeeded
+      progress: 3/3
+      resourcesDuration:
+        cpu: 312
+        memory: 312
+      startedAt: "2026-05-23T21:02:51Z"
+      templateName: podtato-head
+      templateScope: local/podtato-head-1779570170665
+      type: Steps
+    podtato-head-1779570170665-570508912:
+      boundaryID: podtato-head-1779570170665
+      children:
+      - podtato-head-1779570170665-2117677595
+      displayName: pod-delete-zl4
+      finishedAt: "2026-05-23T21:05:51Z"
+      hostNodeName: kind-control-plane
+      id: podtato-head-1779570170665-570508912
+      inputs:
+        artifacts:
+        - name: pod-delete-zl4
+          path: /tmp/chaosengine-pod-delete-zl4.yaml
+          raw:
+            data: |
+              apiVersion: litmuschaos.io/v1alpha1
+              kind: ChaosEngine
+              metadata:
+                annotations:
+                  probeRef: '[{"name":"check-podtato-head-hat-pod","mode":"EOT"}]'
+                creationTimestamp: null
+                generateName: pod-delete-zl4
+                labels:
+                  infra_id: b478e24a-a045-4e7c-a46b-cb06f019abba
+                  step_pod_name: 'podtato-head-1779570170665-570508912'
+                  workflow_name: podtato-head
+                  workflow_run_id: '0d284397-0dbb-4390-95a1-fc21d20a0f11'
+                namespace: 'litmus'
+              spec:
+                appinfo:
+                  appkind: deployment
+                  applabel: app=podtato-head-hat
+                  appns: podtato-kubectl
+                chaosServiceAccount: litmus-admin
+                components:
+                  runner:
+                    resources: {}
+                engineState: active
+                experiments:
+                - name: pod-delete
+                  spec:
+                    components:
+                      env:
+                      - name: TOTAL_CHAOS_DURATION
+                        value: "15"
+                      - name: RAMP_TIME
+                      - name: FORCE
+                        value: "true"
+                      - name: CHAOS_INTERVAL
+                        value: "5"
+                      - name: PODS_AFFECTED_PERC
+                      - name: TARGET_CONTAINER
+                      - name: TARGET_PODS
+                      - name: DEFAULT_HEALTH_CHECK
+                        value: "false"
+                      - name: NODE_LABEL
+                      - name: SEQUENCE
+                        value: parallel
+                      resources: {}
+                      statusCheckTimeouts: {}
+                    probe:
+                    - cmdProbe/inputs:
+                        command: kubectl get pods -n podtato-kubectl | grep podtato-head-hat | grep
+                          Running | wc -l
+                        comparator:
+                          criteria: '>'
+                          type: int
+                          value: "0"
+                      mode: EOT
+                      name: check-podtato-head-hat-pod
+                      runProperties:
+                        attempt: 1
+                        interval: 1s
+                        probeTimeout: 10s
+                      type: cmdProbe
+              status:
+                engineStatus: ""
+                experiments: null
+      name: podtato-head-1779570170665[1].pod-delete-zl4
+      outputs:
+        exitCode: "0"
+      phase: Succeeded
+      progress: 1/1
+      resourcesDuration:
+        cpu: 244
+        memory: 244
+      startedAt: "2026-05-23T21:03:46Z"
+      templateName: pod-delete-zl4
+      templateScope: local/podtato-head-1779570170665
+      type: Pod
+    podtato-head-1779570170665-2117677595:
+      boundaryID: podtato-head-1779570170665
+      children:
+      - podtato-head-1779570170665-3568337420
+      displayName: '[2]'
+      finishedAt: "2026-05-23T21:06:11Z"
+      id: podtato-head-1779570170665-2117677595
+      name: podtato-head-1779570170665[2]
+      phase: Succeeded
+      progress: 1/1
+      resourcesDuration:
+        cpu: 2
+        memory: 2
+      startedAt: "2026-05-23T21:06:01Z"
+      templateScope: local/podtato-head-1779570170665
+      type: StepGroup
+    podtato-head-1779570170665-3191886496:
+      boundaryID: podtato-head-1779570170665
+      children:
+      - podtato-head-1779570170665-570508912
+      displayName: '[1]'
+      finishedAt: "2026-05-23T21:06:01Z"
+      id: podtato-head-1779570170665-3191886496
+      name: podtato-head-1779570170665[1]
+      phase: Succeeded
+      progress: 2/2
+      resourcesDuration:
+        cpu: 246
+        memory: 246
+      startedAt: "2026-05-23T21:03:46Z"
+      templateScope: local/podtato-head-1779570170665
+      type: StepGroup
+    podtato-head-1779570170665-3258849877:
+      boundaryID: podtato-head-1779570170665
+      children:
+      - podtato-head-1779570170665-3555841229
+      displayName: '[0]'
+      finishedAt: "2026-05-23T21:03:46Z"
+      id: podtato-head-1779570170665-3258849877
+      name: podtato-head-1779570170665[0]
+      phase: Succeeded
+      progress: 3/3
+      resourcesDuration:
+        cpu: 312
+        memory: 312
+      startedAt: "2026-05-23T21:02:51Z"
+      templateScope: local/podtato-head-1779570170665
+      type: StepGroup
+    podtato-head-1779570170665-3555841229:
+      boundaryID: podtato-head-1779570170665
+      children:
+      - podtato-head-1779570170665-3191886496
+      displayName: install-chaos-faults
+      finishedAt: "2026-05-23T21:03:36Z"
+      hostNodeName: kind-control-plane
+      id: podtato-head-1779570170665-3555841229
+      inputs:
+        artifacts:
+        - name: pod-delete-zl4
+          path: /tmp/pod-delete-zl4.yaml
+          raw:
+            data: |
+              apiVersion: litmuschaos.io/v1alpha1
+              description:
+                message: |
+                  Deletes a pod belonging to a deployment/statefulset/daemonset
+              kind: ChaosExperiment
+              metadata:
+                name: pod-delete
+                labels:
+                  name: pod-delete
+                  app.kubernetes.io/part-of: litmus
+                  app.kubernetes.io/component: chaosexperiment
+                  app.kubernetes.io/version: 3.28.0
+              spec:
+                definition:
+                  scope: Namespaced
+                  permissions:
+                    - apiGroups:
+                        - ""
+                      resources:
+                        - pods
+                      verbs:
+                        - create
+                        - delete
+                        - get
+                        - list
+                        - patch
+                        - update
+                        - deletecollection
+                    - apiGroups:
+                        - ""
+                      resources:
+                        - events
+                      verbs:
+                        - create
+                        - get
+                        - list
+                        - patch
+                        - update
+                    - apiGroups:
+                        - ""
+                      resources:
+                        - configmaps
+                      verbs:
+                        - get
+                        - list
+                    - apiGroups:
+                        - ""
+                      resources:
+                        - pods/log
+                      verbs:
+                        - get
+                        - list
+                        - watch
+                    - apiGroups:
+                        - ""
+                      resources:
+                        - pods/exec
+                      verbs:
+                        - get
+                        - list
+                        - create
+                    - apiGroups:
+                        - apps
+                      resources:
+                        - deployments
+                        - statefulsets
+                        - replicasets
+                        - daemonsets
+                      verbs:
+                        - list
+                        - get
+                    - apiGroups:
+                        - apps.openshift.io
+                      resources:
+                        - deploymentconfigs
+                      verbs:
+                        - list
+                        - get
+                    - apiGroups:
+                        - ""
+                      resources:
+                        - replicationcontrollers
+                      verbs:
+                        - get
+                        - list
+                    - apiGroups:
+                        - argoproj.io
+                      resources:
+                        - rollouts
+                      verbs:
+                        - list
+                        - get
+                    - apiGroups:
+                        - batch
+                      resources:
+                        - jobs
+                      verbs:
+                        - create
+                        - list
+                        - get
+                        - delete
+                        - deletecollection
+                    - apiGroups:
+                        - litmuschaos.io
+                      resources:
+                        - chaosengines
+                        - chaosexperiments
+                        - chaosresults
+                      verbs:
+                        - create
+                        - list
+                        - get
+                        - patch
+                        - update
+                        - delete
+                  image: litmuschaos/go-runner:3.28.0
+                  imagePullPolicy: Always
+                  args:
+                    - -c
+                    - ./experiments -name pod-delete
+                  command:
+                    - /bin/bash
+                  env:
+                    - name: TOTAL_CHAOS_DURATION
+                      value: "15"
+                    - name: RAMP_TIME
+                      value: ""
+                    - name: FORCE
+                      value: "true"
+                    - name: CHAOS_INTERVAL
+                      value: "5"
+                    - name: PODS_AFFECTED_PERC
+                      value: ""
+                    - name: TARGET_CONTAINER
+                      value: ""
+                    - name: TARGET_PODS
+                      value: ""
+                    - name: DEFAULT_HEALTH_CHECK
+                      value: "false"
+                    - name: NODE_LABEL
+                      value: ""
+                    - name: SEQUENCE
+                      value: parallel
+                  labels:
+                    name: pod-delete
+                    app.kubernetes.io/part-of: litmus
+                    app.kubernetes.io/component: experiment-job
+                    app.kubernetes.io/version: 3.28.0
+      name: podtato-head-1779570170665[0].install-chaos-faults
+      outputs:
+        exitCode: "0"
+      phase: Succeeded
+      progress: 1/1
+      resourcesDuration:
+        cpu: 66
+        memory: 66
+      startedAt: "2026-05-23T21:02:51Z"
+      templateName: install-chaos-faults
+      templateScope: local/podtato-head-1779570170665
+      type: Pod
+    podtato-head-1779570170665-3568337420:
+      boundaryID: podtato-head-1779570170665
+      displayName: cleanup-chaos-resources
+      finishedAt: "2026-05-23T21:06:03Z"
+      hostNodeName: kind-control-plane
+      id: podtato-head-1779570170665-3568337420
+      name: podtato-head-1779570170665[2].cleanup-chaos-resources
+      outputs:
+        exitCode: "0"
+      phase: Succeeded
+      progress: 1/1
+      resourcesDuration:
+        cpu: 2
+        memory: 2
+      startedAt: "2026-05-23T21:06:01Z"
+      templateName: cleanup-chaos-resources
+      templateScope: local/podtato-head-1779570170665
+      type: Pod
+  phase: Succeeded
+  progress: 3/3
+  resourcesDuration:
+    cpu: 312
+    memory: 312
+  startedAt: "2026-05-23T21:02:51Z"
