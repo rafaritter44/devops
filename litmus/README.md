@@ -4,10 +4,6 @@
 
 - An open-source Chaos Engineering platform for Kubernetes.
 - Provides pre-built Chaos Experiments.
-    - Pod delete.
-    - Pod CPU hog.
-    - Network latency.
-    - Node drain.
 - And a web UI (ChaosCenter).
 
 ## Concepts
@@ -18,6 +14,36 @@ Chaos Experiment
 ## Architecture
 
 User -> ChaosCenter/UI -> Chaos Engine (CRD) -> Chaos Runner Pod -> Inject Faults into Target App
+
+## Experiments
+
+Pod Chaos
+1. Container Kill
+1. Disk Fill
+1. Pod CPU Hog
+1. Pod Memory Hog
+1. Pod Delete
+1. Pod Network Latency
+1. ...
+
+Node Chaos
+1. Node CPU Hog
+1. Node Memory Hog
+1. Node Restart
+1. ...
+
+Application Chaos
+1. Spring Boot App Kill
+1. Spring Boot Exception
+1. ...
+
+AWS Chaos
+1. EC2 Stop By ID
+1. EC2 Stop By Tag
+1. ...
+
+GCP, Azure, VMWare
+1. ...
 
 ## POC
 
