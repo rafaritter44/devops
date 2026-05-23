@@ -56,7 +56,7 @@ kubectl port-forward svc/chaos-litmus-frontend-service -n litmus 9091:9091
 kind delete cluster
 ```
 
-## Trade-offs
+## Comparison
 
 Litmus
 - 2019
