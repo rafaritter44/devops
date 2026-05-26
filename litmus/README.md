@@ -13,7 +13,7 @@ Chaos Experiment
 
 ## Architecture
 
-User -> ChaosCenter/UI -> Chaos Engine (CRD) -> Chaos Runner Pod -> Inject Faults into Target App
+![Architecture](images/architecture.png)
 
 ## Experiments
 
@@ -65,7 +65,7 @@ kind delete cluster
 
 ### Result
 
-![Experiment Result](experiment-result.png)
+![Experiment Result](images/experiment-result.png)
 
 ## Comparison
 
