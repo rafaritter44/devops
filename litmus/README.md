@@ -8,8 +8,8 @@
 
 ## Concepts
 
-Chaos Scenario
-Chaos Experiment
+- Chaos Scenario
+- Chaos Experiment
 
 ## Architecture
 
@@ -17,7 +17,8 @@ Chaos Experiment
 
 ## Experiments
 
-Pod Chaos
+### Pod Chaos
+
 1. Container Kill
 1. Disk Fill
 1. Pod CPU Hog
@@ -26,23 +27,27 @@ Pod Chaos
 1. Pod Network Latency
 1. ...
 
-Node Chaos
+### Node Chaos
+
 1. Node CPU Hog
 1. Node Memory Hog
 1. Node Restart
 1. ...
 
-Application Chaos
+### Application Chaos
+
 1. Spring Boot App Kill
 1. Spring Boot Exception
 1. ...
 
-AWS Chaos
+### AWS Chaos
+
 1. EC2 Stop By ID
 1. EC2 Stop By Tag
 1. ...
 
-GCP, Azure, VMWare
+### GCP, Azure, VMWare
+
 1. ...
 
 ## POC
