@@ -103,18 +103,21 @@ kind delete cluster
 
 ## Comparison
 
-Litmus
+### Litmus
+
 - 2019
 - Open-source
 - Kubernetes
 
-Other tools
+### Other tools
+
 - Chaos Monkey (pioneer, open-sourced in 2012)
 - Gremlin (commercial tool, 2017)
 - AWS FIS (2021)
 - Chaos Mesh (open-source, K8s, 2019)
 
-Litmus vs. Chaos Mesh
+### Litmus vs. Chaos Mesh
+
 - Chaos Mesh
     - Fault Injector
     - Simpler
