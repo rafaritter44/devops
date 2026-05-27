@@ -6,11 +6,6 @@
 - Provides pre-built Chaos Experiments.
 - And a web UI (ChaosCenter).
 
-## Concepts
-
-- Chaos Scenario
-- Chaos Experiment
-
 ## Architecture
 
 ![Architecture](images/architecture.png)
