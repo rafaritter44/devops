@@ -3,8 +3,9 @@
 ## What is Litmus?
 
 - An open-source Chaos Engineering platform for Kubernetes.
-- Provides pre-built Chaos Experiments.
-- And a web UI (ChaosCenter).
+- Pre-built chaos experiments.
+- A web UI (ChaosCenter).
+- Breaks your system on purpose.
 
 ## Architecture
 
