@@ -116,15 +116,5 @@ kind delete cluster
 - Gremlin (commercial tool, 2017)
 - AWS FIS (2021)
 - Chaos Mesh (open-source, K8s, 2019)
-
-### Litmus vs. Chaos Mesh
-
-- Chaos Mesh
-    - Fault Injector
-    - Simpler
-    - Best for debugging
-    - Requires scripting
-- Litmus
-    - Chaos Platform/Orchestrator
-    - More complex
-    - Best for pipelines
+    - No resilience probe
+    - No "Pass" or "Fail"
